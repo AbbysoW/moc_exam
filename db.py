@@ -46,7 +46,7 @@ class DB:
         )
 
     def init_db(self) -> None:
-        """Создаёт таблицу MetaData, если она ещё не существует."""
+        """Создаёт таблицу Users, если она ещё не существует."""
         Base.metadata.create_all(
             self._engine,
             tables=[Users.__table__],

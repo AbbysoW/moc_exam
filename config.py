@@ -1,15 +1,14 @@
-from pydantic import BaseModel, computed_field
+from pydantic import BaseModel
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class DBConfig(BaseModel):
     dbms: str = "postgresql+psycopg"
-    host_url: str
-    db: str
-    user: str
-    password: str
+    host_url: str = ""
+    db: str = ""
+    user: str = ""
+    password: str = ""
 
-    @computed_field
     @property
     def url(self):
         return f"{self.dbms}://{self.user}:{self.password}@{self.host_url}/{self.db}"
@@ -22,6 +21,6 @@ class Settings(BaseSettings):
         extra="ignore",
     )
 
-    db = DBConfig()
+    db: DBConfig = DBConfig()
 
 settings = Settings()
